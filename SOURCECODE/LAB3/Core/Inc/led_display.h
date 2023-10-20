@@ -35,6 +35,7 @@ void update7SEG0(int index);
 void update7SEG1(int index);
 void sevenSegTimerInterupt();
 
+void TimerInterupt();
 
 
 #endif /* INC_LED_DISPLAY_H_ */

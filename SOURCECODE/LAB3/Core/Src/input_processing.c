@@ -6,44 +6,13 @@
  */
 
 #include "input_reading.h"
+#include "led_display.h"
+#include "software_timer.h"
 
-int sevenLEDvalueBuffer[]={1,0};
 int sevenLEDdisplayBuffer[]={0,1,0,0};
 enum MODE{MODE1, MODE2, MODE3, MODE4} ;
 enum MODE currMode = MODE1;
-void fsm_for_input_processing(void){
-	switch(currMode){
-	case MODE1:
-		if(is_button_pressed(0)){
-			currMode = MODE2;
-			sevenLEDvalueBuffer[0]=2;
-			sevenLEDvalueToDisplay(0,2);
-		}
-		break;
-	case MODE2:
-		if(is_button_pressed(0)){
-			currMode = MODE3;
-			sevenLEDvalueBuffer[0]=3;
-			sevenLEDvalueToDisplay(0,3);
-		}
-		break;
-	case MODE3:
-		if(is_button_pressed(0)){
-			currMode = MODE4;
-			sevenLEDvalueBuffer[0]=4;
-			sevenLEDvalueToDisplay(0,4);
-		}
-		break;
 
-	case MODE4:
-		if(is_button_pressed(0)){
-			currMode = MODE1;
-			sevenLEDvalueBuffer[0]=1;
-			sevenLEDvalueToDisplay(0,1);
-		}
-		break;
-	}
-}
 void sevenLEDvalueToDisplay(int index,int value){
 	switch(index){
 	case 0:
@@ -57,4 +26,40 @@ void sevenLEDvalueToDisplay(int index,int value){
 	default:
 		break;
 	}
+}
+void fsm_for_input_processing(void){
+	button_reading(0);
+	button_reading(1);
+	if(timer_flag[2]==1){
+		setTimer(2,50);
+		switch(currMode){
+		case MODE1:
+			if(is_button_pressed(0)||is_button_pressed_1s(0)){
+				currMode = MODE2;
+				sevenLEDvalueToDisplay(0,2);
+			}
+			break;
+		case MODE2:
+			if(is_button_pressed(0)||is_button_pressed_1s(0)){
+				currMode = MODE3;
+				sevenLEDvalueToDisplay(0,3);
+			}
+			break;
+		case MODE3:
+			if(is_button_pressed(0)||is_button_pressed_1s(0)){
+				currMode = MODE4;
+				sevenLEDvalueToDisplay(0,4);
+			}
+			break;
+		case MODE4:
+			if(is_button_pressed(0)||is_button_pressed_1s(0)){
+				currMode = MODE1;
+				sevenLEDvalueToDisplay(0,1);
+			}
+			break;
+		}
+	}
+
+	TimerInterupt();
+
 }

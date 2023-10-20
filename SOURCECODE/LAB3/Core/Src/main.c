@@ -92,25 +92,18 @@ int main(void)
   MX_GPIO_Init();
   MX_TIM2_Init();
   /* USER CODE BEGIN 2 */
+  HAL_TIM_Base_Start_IT(&htim2);
   /* USER CODE END 2 */
 
   /* Infinite loop */
   /* USER CODE BEGIN WHILE */
-  int index_led=0;
   const int sevenSegTimer=25;
   setTimer(0,sevenSegTimer);
+  setTimer(1,50);
+  setTimer(2,50);
   while (1)
   {
-	  button_reading(0);
 	  fsm_for_input_processing();
-	  if(timer_flag[0]==1){
-		  if(index_led>1){
-			  index_led=0;
-		  }
-		  update7SEG0(index_led++);
-		  update7SEG1(index_led++);
-		  setTimer(0,sevenSegTimer);
-	  	}
     /* USER CODE END WHILE */
 
     /* USER CODE BEGIN 3 */

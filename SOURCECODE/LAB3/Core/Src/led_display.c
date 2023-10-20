@@ -382,12 +382,12 @@ void update7SEG1(int index){
 	        case 0:
 	            //Display the first 7SEG with sevenLEDdisplayBuffer[1]
 	        	TurnOffAll7SEG1();
-	        	display7SEG(1,sevenLEDdisplayBuffer[1]);
+	        	display7SEG(1,sevenLEDdisplayBuffer[3]);
 	            break;
 	        case 1:
 	            //Display the second 7SEG with sevenLEDdisplayBuffer[0]
 	        	TurnOffAll7SEG1();
-	        	display7SEG(1,sevenLEDdisplayBuffer[0]);
+	        	display7SEG(1,sevenLEDdisplayBuffer[2]);
 	            break;
 	        default:
 	            break;
@@ -395,4 +395,16 @@ void update7SEG1(int index){
     	OnEN_7SEG1(index);
 	}
 
-
+int index_led=0;
+const int sevenSegTimer=5;
+void TimerInterupt(){
+	if(timer_flag[0]==1){
+			index_led++;
+			 if(index_led>1){
+				 index_led=0;
+			 }
+			 update7SEG0(index_led);
+			 update7SEG1(index_led);
+			 setTimer(0,sevenSegTimer);
+		  }
+}
