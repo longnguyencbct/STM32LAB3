@@ -99,8 +99,7 @@ int main(void)
   /* USER CODE BEGIN WHILE */
   const int sevenSegTimer=25;
   setTimer(0,sevenSegTimer);
-  setTimer(1,50);
-  setTimer(2,50);
+  setTimer(1,25);
   while (1)
   {
 	  fsm_for_input_processing();

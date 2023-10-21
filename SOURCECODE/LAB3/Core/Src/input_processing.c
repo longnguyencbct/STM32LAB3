@@ -30,8 +30,8 @@ void sevenLEDvalueToDisplay(int index,int value){
 void fsm_for_input_processing(void){
 	button_reading(0);
 	button_reading(1);
-	if(timer_flag[2]==1){
-		setTimer(2,50);
+	if(timer_flag[1]==1){
+		setTimer(1,25);
 		switch(currMode){
 		case MODE1:
 			if(is_button_pressed(0)||is_button_pressed_1s(0)){

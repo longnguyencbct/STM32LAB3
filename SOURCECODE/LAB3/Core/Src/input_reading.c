@@ -6,7 +6,6 @@
  */
 
 #include "main.h"
-#include "software_timer.h"
 //we aim to work with more than one buttons
 #define N0_OF_BUTTONS 				       3
 //timer interrupt duration is 10ms, so to pass 1 second,
@@ -28,16 +27,6 @@ static uint8_t flagForButtonPress1s[N0_OF_BUTTONS];
 //we define counter for automatically increasing the value
 //after the button is pressed more than 1 second.
 static uint16_t counterForButtonPress1s[N0_OF_BUTTONS];
-
-int button_flag[N0_OF_BUTTONS]={0,0,0};
-
-void subKeyProcess(int index){
-	if(timer_flag[1]==1){
-		setTimer(1,50);
-		button_flag[index]=1;
-	}
-}
-
 void button_reading(int index){
 	switch(index){
 
@@ -54,7 +43,6 @@ void button_reading(int index){
 			buttonBuffer[0] = debounceButtonBuffer1[0];
 			if(buttonBuffer[0] == BUTTON_IS_PRESSED){
 			//if a button is pressed, we start counting
-				subKeyProcess(0);
 				if(counterForButtonPress1s[0] < DURATION_FOR_AUTO_INCREASING){
 					counterForButtonPress1s[0]++;
 				} else {
@@ -81,7 +69,6 @@ void button_reading(int index){
 			buttonBuffer[1] = debounceButtonBuffer1[1];
 			if(buttonBuffer[1] == BUTTON_IS_PRESSED){
 			//if a button is pressed, we start counting
-				subKeyProcess(1);
 				if(counterForButtonPress1s[1] < DURATION_FOR_AUTO_INCREASING){
 					counterForButtonPress1s[1]++;
 				} else {
@@ -108,7 +95,6 @@ void button_reading(int index){
 			buttonBuffer[2] = debounceButtonBuffer1[2];
 			if(buttonBuffer[2] == BUTTON_IS_PRESSED){
 			//if a button is pressed, we start counting
-				subKeyProcess(2);
 				if(counterForButtonPress1s[2] < DURATION_FOR_AUTO_INCREASING){
 					counterForButtonPress1s[2]++;
 				} else {
@@ -127,13 +113,9 @@ void button_reading(int index){
 	}
 
 }
-int is_button_pressed(int index){
+unsigned char is_button_pressed(uint8_t index){
 	if(index >= N0_OF_BUTTONS) return 0;
-	if(button_flag[index]==1){
-		button_flag[index]=0;
-		return 1;
-	}
-	return 0;
+	return (buttonBuffer[index] == BUTTON_IS_PRESSED);
 }
 unsigned char is_button_pressed_1s(unsigned char index){
 	if(index >= N0_OF_BUTTONS) return 0xff;
