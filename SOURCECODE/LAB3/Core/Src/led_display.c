@@ -395,16 +395,97 @@ void update7SEG1(int index){
     	OnEN_7SEG1(index);
 	}
 
+/////////////////////////////////////////////////////////////////////////////////////
+void OnRed1(){
+	  HAL_GPIO_WritePin (LED_RED1_GPIO_Port, LED_RED1_Pin, GPIO_PIN_RESET);
+}
+void OnYellow1(){
+	  HAL_GPIO_WritePin (LED_YELLOW1_GPIO_Port, LED_YELLOW1_Pin, GPIO_PIN_RESET);
+}
+void OnGreen1(){
+	  HAL_GPIO_WritePin (LED_GREEN1_GPIO_Port, LED_GREEN1_Pin, GPIO_PIN_RESET);
+}
+void OffRed1(){
+	  HAL_GPIO_WritePin (LED_RED1_GPIO_Port, LED_RED1_Pin, GPIO_PIN_SET);
+}
+void OffYellow1(){
+	  HAL_GPIO_WritePin (LED_YELLOW1_GPIO_Port, LED_YELLOW1_Pin, GPIO_PIN_SET);
+}
+void OffGreen1(){
+	  HAL_GPIO_WritePin (LED_GREEN1_GPIO_Port, LED_GREEN1_Pin, GPIO_PIN_SET);
+}
+/////////////////////////////////////////////////
+void OnRed2(){
+	  HAL_GPIO_WritePin (LED_RED2_GPIO_Port, LED_RED2_Pin, GPIO_PIN_RESET);
+}
+void OnYellow2(){
+	  HAL_GPIO_WritePin (LED_YELLOW2_GPIO_Port, LED_YELLOW2_Pin, GPIO_PIN_RESET);
+}
+void OnGreen2(){
+	  HAL_GPIO_WritePin (LED_GREEN2_GPIO_Port, LED_GREEN2_Pin, GPIO_PIN_RESET);
+}
+void OffRed2(){
+	  HAL_GPIO_WritePin (LED_RED2_GPIO_Port, LED_RED2_Pin, GPIO_PIN_SET);
+}
+void OffYellow2(){
+	  HAL_GPIO_WritePin (LED_YELLOW2_GPIO_Port, LED_YELLOW2_Pin, GPIO_PIN_SET);
+}
+void OffGreen2(){
+	  HAL_GPIO_WritePin (LED_GREEN2_GPIO_Port, LED_GREEN2_Pin, GPIO_PIN_SET);
+}
+/////////////////////////////////////////////////
+void OffAllLED(){
+	OffRed1();
+	OffYellow1();
+	OffGreen1();
+	OffRed2();
+	OffYellow2();
+	OffGreen2();
+}
+
+void ToggleAllRed(){
+	HAL_GPIO_TogglePin(LED_RED1_GPIO_Port, LED_RED1_Pin);
+	HAL_GPIO_TogglePin(LED_RED2_GPIO_Port, LED_RED2_Pin);
+}
+
+void ToggleAllYellow(){
+	HAL_GPIO_TogglePin(LED_YELLOW1_GPIO_Port, LED_YELLOW1_Pin);
+	HAL_GPIO_TogglePin(LED_YELLOW2_GPIO_Port, LED_YELLOW2_Pin);
+}
+
+void ToggleAllGreen(){
+	HAL_GPIO_TogglePin(LED_GREEN1_GPIO_Port, LED_GREEN1_Pin);
+	HAL_GPIO_TogglePin(LED_GREEN2_GPIO_Port, LED_GREEN2_Pin);
+}
+
+
 int index_led=0;
 const int sevenSegTimer=5;
+const int LEDblinkingTimer=25;
 void TimerInterupt(){
 	if(timer_flag[0]==1){
-			index_led++;
-			 if(index_led>1){
-				 index_led=0;
-			 }
-			 update7SEG0(index_led);
-			 update7SEG1(index_led);
-			 setTimer(0,sevenSegTimer);
-		  }
+		setTimer(0,sevenSegTimer);
+		index_led++;
+		if(index_led>1){
+			index_led=0;
+		}
+		update7SEG0(index_led);
+		update7SEG1(index_led);
+	}
+	if(timer_flag[2]==1){
+		setTimer(2,LEDblinkingTimer);
+		switch(currMode){
+			case MODE2:
+				ToggleAllRed();
+				break;
+			case MODE3:
+				ToggleAllYellow();
+				break;
+			case MODE4:
+				ToggleAllGreen();
+				break;
+			default:
+				break;
+		}
+	}
 }

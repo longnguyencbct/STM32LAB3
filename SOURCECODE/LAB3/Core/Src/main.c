@@ -100,6 +100,7 @@ int main(void)
   const int sevenSegTimer=25;
   setTimer(0,sevenSegTimer);
   setTimer(1,25);
+  setTimer(2,25);
   while (1)
   {
 	  fsm_for_input_processing();

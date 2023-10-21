@@ -37,18 +37,24 @@ void fsm_for_input_processing(void){
 			if(is_button_pressed(0)||is_button_pressed_1s(0)){
 				currMode = MODE2;
 				sevenLEDvalueToDisplay(0,2);
+				OffAllLED();
+				ToggleAllRed();
 			}
 			break;
 		case MODE2:
 			if(is_button_pressed(0)||is_button_pressed_1s(0)){
 				currMode = MODE3;
 				sevenLEDvalueToDisplay(0,3);
+				OffAllLED();
+				ToggleAllYellow();
 			}
 			break;
 		case MODE3:
 			if(is_button_pressed(0)||is_button_pressed_1s(0)){
 				currMode = MODE4;
 				sevenLEDvalueToDisplay(0,4);
+				OffAllLED();
+				ToggleAllGreen();
 			}
 			break;
 		case MODE4:
