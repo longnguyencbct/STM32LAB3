@@ -36,10 +36,7 @@ void button_reading(int index){
 		debounceButtonBuffer3[0] =debounceButtonBuffer2[0];
 		debounceButtonBuffer2[0] =debounceButtonBuffer1[0];
 		debounceButtonBuffer1[0] = HAL_GPIO_ReadPin(Button0_GPIO_Port, Button0_Pin);
-		if(debounceButtonBuffer1[0] == debounceButtonBuffer2[0]&&
-		   debounceButtonBuffer2[0] == debounceButtonBuffer3[0]&&
-		   debounceButtonBuffer3[0] == debounceButtonBuffer4[0]&&
-		   debounceButtonBuffer4[0] == debounceButtonBuffer5[0])
+		if(debounceButtonBuffer1[0] == debounceButtonBuffer2[0])
 			buttonBuffer[0] = debounceButtonBuffer1[0];
 			if(buttonBuffer[0] == BUTTON_IS_PRESSED){
 			//if a button is pressed, we start counting
@@ -62,10 +59,7 @@ void button_reading(int index){
 		debounceButtonBuffer3[1] =debounceButtonBuffer2[1];
 		debounceButtonBuffer2[1] =debounceButtonBuffer1[1];
 		debounceButtonBuffer1[1] = HAL_GPIO_ReadPin(Button1_GPIO_Port, Button1_Pin);
-		if(debounceButtonBuffer1[1] == debounceButtonBuffer2[1]&&
-		   debounceButtonBuffer2[1] == debounceButtonBuffer3[1]&&
-		   debounceButtonBuffer3[1] == debounceButtonBuffer4[1]&&
-		   debounceButtonBuffer4[1] == debounceButtonBuffer5[1])
+		if(debounceButtonBuffer1[1] == debounceButtonBuffer2[1])
 			buttonBuffer[1] = debounceButtonBuffer1[1];
 			if(buttonBuffer[1] == BUTTON_IS_PRESSED){
 			//if a button is pressed, we start counting
@@ -88,10 +82,7 @@ void button_reading(int index){
 		debounceButtonBuffer3[2] =debounceButtonBuffer2[2];
 		debounceButtonBuffer2[2] =debounceButtonBuffer1[2];
 		debounceButtonBuffer1[2] = HAL_GPIO_ReadPin(Button2_GPIO_Port, Button2_Pin);
-		if(debounceButtonBuffer1[2] == debounceButtonBuffer2[2]&&
-		   debounceButtonBuffer2[2] == debounceButtonBuffer3[2]&&
-		   debounceButtonBuffer3[2] == debounceButtonBuffer4[2]&&
-		   debounceButtonBuffer4[2] == debounceButtonBuffer5[2])
+		if(debounceButtonBuffer1[2] == debounceButtonBuffer2[2])
 			buttonBuffer[2] = debounceButtonBuffer1[2];
 			if(buttonBuffer[2] == BUTTON_IS_PRESSED){
 			//if a button is pressed, we start counting

@@ -442,7 +442,16 @@ void OffAllLED(){
 	OffYellow2();
 	OffGreen2();
 }
-
+void OffAllLED1(){
+	OffRed1();
+	OffYellow1();
+	OffGreen1();
+}
+void OffAllLED2(){
+	OffRed2();
+	OffYellow2();
+	OffGreen2();
+}
 void ToggleAllRed(){
 	HAL_GPIO_TogglePin(LED_RED1_GPIO_Port, LED_RED1_Pin);
 	HAL_GPIO_TogglePin(LED_RED2_GPIO_Port, LED_RED2_Pin);
@@ -457,8 +466,33 @@ void ToggleAllGreen(){
 	HAL_GPIO_TogglePin(LED_GREEN1_GPIO_Port, LED_GREEN1_Pin);
 	HAL_GPIO_TogglePin(LED_GREEN2_GPIO_Port, LED_GREEN2_Pin);
 }
-
-
+/////////////////////////////////////////////////
+void updateM1LEDS(){
+	OffAllLED();
+	switch(currM1State1){
+		case A_RED1:
+			OnRed1();
+			break;
+		case A_YELLOW1:
+			OnYellow1();
+			break;
+		case A_GREEN1:
+			OnGreen1();
+			break;
+	}
+	switch(currM1State2){
+		case A_RED2:
+			OnRed2();
+			break;
+		case A_YELLOW2:
+			OnYellow2();
+			break;
+		case A_GREEN2:
+			OnGreen2();
+			break;
+	}
+}
+/////////////////////////////////////////////////
 int index_led=0;
 const int sevenSegTimer=5;
 const int LEDblinkingTimer=25;

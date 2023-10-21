@@ -52,7 +52,8 @@ void OffYellow2();
 void OffGreen2();
 
 void OffAllLED();
-
+void OffAllLED1();
+void OffAllLED2();
 void ToggleAllRed();
 void ToggleAllYellow();
 void ToggleAllGreen();

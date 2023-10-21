@@ -99,8 +99,10 @@ int main(void)
   /* USER CODE BEGIN WHILE */
   const int sevenSegTimer=25;
   setTimer(0,sevenSegTimer);
-  setTimer(1,25);
+  setTimer(1,15);
   setTimer(2,25);
+  setTimer(3,100);
+  init_for_automatic_leds();
   while (1)
   {
 	  fsm_for_input_processing();
